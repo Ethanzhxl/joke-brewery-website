@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玩笑酿造 | 海口精酿啤酒</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #f97316;
+            --primary-dark: #ea580c;
+            --secondary: #1e293b;
+            --accent: #fbbf24;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --success: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            cursor: pointer;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.9)), url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 180px 0 100px;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #e2e8f0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* 关于我们 */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        .values {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .value-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .value-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .value-item i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .value-item h4 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* 产品展示 */
+        .products {
+            background-color: #f1f5f9;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 25px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .product-type {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .product-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        /* 更多酒款样式 */
+        .more-products {
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        .more-products h3 {
+            margin-bottom: 20px;
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+        
+        .more-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .more-item {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            min-width: 180px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .more-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .more-item h4 {
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .more-item p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .more-note {
+            margin-top: 30px;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        /* 酿造过程 */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            counter-reset: step-counter;
+        }
+        
+        .process-step {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            position: relative;
+            text-align: center;
+        }
+        
+        .process-step::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .process-step i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .process-step h4 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* 联系方式 */
+        .contact {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .contact .section-title h2 {
+            color: white;
+        }
+        
+        .contact .section-title p {
+            color: #cbd5e1;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .contact-details {
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #cbd5e1;
+        }
+        
+        .contact-form button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+        }
+        
+        .contact-form button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* 页脚 */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        #view-counter {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        #view-counter:hover {
+            color: #f0b90b;
+            transition: color 0.3s;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            .values {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="joke_logo_small.jpg" alt="玩笑酿造" style="height: 40px; margin-right: 10px;">
+                <span style="display: none;">玩笑酿造</span>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="#home">首页</a>
+                <a href="#about">关于我们</a>
+                <a href="#products">我们的啤酒</a>
+                <a href="#process">酿造工艺</a>
+                <a href="#contact">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>玩笑，是我们对待生活的松弛态度</h1>
+            <p>四年来，无数有趣的灵魂在这方小天地相遇，用一杯杯好喝的啤酒，交换了无数值得回味的故事。</p>
+            <a href="#about" class="cta-button">了解我们的故事</a>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>关于玩笑酿造</h2>
+                <p>四年的沉淀，无数故事的交换。我们不只是酿造啤酒，更在酿造连接与回忆。</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="玩笑酿造酒厂">
+                </div>
+                <div class="about-text">
+                    <h3>玩笑背后的认真</h3>
+                    <p><strong>"黑格尔说：没有所谓的玩笑，所有的玩笑都有认真的成份。"</strong></p>
+                    <p>玩笑是我们对待生活的松弛态度，但提供一杯好喝的啤酒却是我们始终坚守的使命。</p>
+                    <p>"讲究"二字承载着我们对每一杯啤酒的认真，这些就是玩笑认真的成份。</p>
+                    <p>我们相信，一杯好喝的啤酒，是一种即刻的感官愉悦，是一种真诚的情感连接，是一种专注的生活哲学，也是一个理解文化的窗口。</p>
+                </div>
+            </div>
+            
+            <div class="values">
+                <div class="value-item">
+                    <i class="fas fa-beer"></i>
+                    <h4>感官愉悦</h4>
+                    <p>每一口都是即刻的感官享受，从香气到回味都精心雕琢。</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-heart"></i>
+                    <h4>情感连接</h4>
+                    <p>用一杯啤酒连接有趣的灵魂，交换值得回味的故事。</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-leaf"></i>
+                    <h4>生活哲学</h4>
+                    <p>在松弛中认真，在玩笑中讲究，这就是我们的酿造哲学。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品展示 -->
+    <section class="section products" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>我们的啤酒</h2>
+                <p>从经典款到创新风味，总有一款适合你的味蕾。</p>
+            </div>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="poster_ideal_web.jpg" alt="失败的启示 - 西海岸IPA">
+                    </div>
+                    <div class="product-info">
+                        <h3>失败的启示</h3>
+                        <span class="product-type">西海岸IPA</span>
+                        <p class="product-description">从失败中汲取灵感，这款IPA带有强烈的柑橘和松针香气，苦味鲜明而直接，如同人生中的挫折，最终带来成长的启示。</p>
+                        <div class="product-details">
+                            <span>酒精度: 6.0%</span>
+                            <span>苦度: 70 IBU</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="poster_dawn_web.jpg" alt="黎明的序章 - 维也纳拉格">
+                    </div>
+                    <div class="product-info">
+                        <h3>黎明的序章</h3>
+                        <span class="product-type">维也纳拉格</span>
+                        <p class="product-description">琥珀色的酒体如同破晓的天空，麦芽的焦糖甜香与适中的苦度完美平衡，象征着新一天的开始与希望。</p>
+                        <div class="product-details">
+                            <span>酒精度: 6.0%</span>
+                            <span>苦度: 22 IBU</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="poster_failure_web.jpg" alt="旷野的气息 - 赛松">
+                    </div>
+                    <div class="product-info">
+                        <h3>旷野的气息</h3>
+                        <span class="product-type">赛松</span>
+                        <p class="product-description">农场酵母带来的野性气息，干爽的酒体带有淡淡的香料和果香，仿佛置身无垠旷野，感受自然的呼吸。</p>
+                        <div class="product-details">
+                            <span>酒精度: 5.5%</span>
+                            <span>苦度: 25 IBU</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 更多酒款 -->
+            <div class="more-products">
+                <h3>更多精彩酒款</h3>
+                <div class="more-list">
+                    <div class="more-item">
+                        <h4>生命的厚度</h4>
+                        <p>美式淡色艾尔 · 5.5%</p>
+                    </div>
+                    <div class="more-item">
+                        <h4>理想的重量</h4>
+                        <p>配方设计中</p>
+                    </div>
+                    <div class="more-item">
+                        <h4>进击的巨人</h4>
+                        <p>配方设计中</p>
+                    </div>
+                    <div class="more-item">
+                        <h4>历史的轮回</h4>
+                        <p>配方设计中</p>
+                    </div>
+                </div>
+                <div class="more-list">
+                    <div class="more-item">
+                        <h4>荒原的心跳</h4>
+                        <p>配方设计中</p>
+                    </div>
+                    <div class="more-item">
+                        <h4>自由的边界</h4>
+                        <p>配方设计中</p>
+                    </div>
+                    <div class="more-item">
+                        <h4>热血的余温</h4>
+                        <p>配方设计中</p>
+                    </div>
+                </div>
+                <p class="more-note">更多酒款正在精心设计中，敬请期待...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 酿造工艺 -->
+    <section class="section" id="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>酿造工艺</h2>
+                <p>从麦芽到酒杯，我们坚持传统工艺与现代技术的完美结合。</p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <i class="fas fa-seedling"></i>
+                    <h4>精选原料</h4>
+                    <p>只选用优质麦芽、啤酒花和酵母，确保每一批啤酒的基础品质。</p>
+                </div>
+                
+                <div class="process-step">
+                    <i class="fas fa-temperature-high"></i>
+                    <h4>糖化与煮沸</h4>
+                    <p>精确控制温度和时间，提取麦芽的精华，释放啤酒花的香气。</p>
+                </div>
+                
+                <div class="process-step">
+                    <i class="fas fa-wine-bottle"></i>
+                    <h4>发酵与熟成</h4>
+                    <p>在恒温环境下缓慢发酵，让风味充分发展，达到最佳口感。</p>
+                </div>
+                
+                <div class="process-step">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>品质检测</h4>
+                    <p>每一批啤酒出厂前都经过严格的质量检测，确保风味稳定。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>联系我们</h2>
+                <p>欢迎来访我们的酿造坊，或通过以下方式与我们取得联系。</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>来喝一杯吧</h3>
+                    <p>我们位于海口市，欢迎啤酒爱好者前来品尝最新鲜的精酿啤酒，参观我们的酿造过程。</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>地址</h4>
+                                <p>海口市龙华区精酿啤酒街88号</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>电话</h4>
+                                <p>0898-8888-8888</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>邮箱</h4>
+                                <p>hello@jokebrewery.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>营业时间</h4>
+                                <p>周一至周五: 14:00 - 23:00<br>周末: 12:00 - 24:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <input type="text" placeholder="您的姓名" required>
+                        <input type="email" placeholder="您的邮箱" required>
+                        <input type="tel" placeholder="您的电话">
+                        <textarea placeholder="您的留言" rows="5" required></textarea>
+                        <button type="submit">发送消息</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <img src="joke_logo_small.jpg" alt="玩笑酿造" style="height: 50px; margin-bottom: 20px;">
+                    <p>玩笑是态度，讲究是使命。四年来，我们在这方小天地，用啤酒连接有趣的灵魂。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-douyin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>快速链接</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#about">关于我们</a></li>
+                        <li><a href="#products">我们的啤酒</a></li>
+                        <li><a href="#process">酿造工艺</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>产品系列</h4>
+                    <ul class="footer-links">
+                        <li><a href="#products">失败的启示</a></li>
+                        <li><a href="#products">黎明的序章</a></li>
+                        <li><a href="#products">旷野的气息</a></li>
+                        <li><a href="#products">更多酒款</a></li>
+                        <li><a href="#products">季节限定</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>订阅资讯</h4>
+                    <p>订阅我们的 newsletter，获取最新产品信息和活动通知。</p>
+                    <form class="subscribe-form">
+                        <input type="email" placeholder="输入您的邮箱" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none;">
+                        <button type="submit" style="background-color: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">订阅</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 玩笑酿造 版权所有 | 四年的沉淀，无数故事的开始</p>
+                <p id="view-counter">👁️ 正在加载浏览量...</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 表单提交
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的留言！我们会尽快与您联系。');
+            this.reset();
+        });
+        
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+        
+        // 浏览量计数器 - 使用CountAPI
+        async function updateViewCounter() {
+            const counterElement = document.getElementById('view-counter');
+            if (!counterElement) return;
+            
+            try {
+                // 为玩笑酿造网站创建唯一的命名空间
+                const namespace = 'joke-brewery-website';
+                const key = 'views';
+                
+                // 首先获取当前计数
+                const getResponse = await fetch(`https://api.countapi.xyz/get/${namespace}/${key}`);
+                const getData = await getResponse.json();
+                
+                let currentCount = getData.value || 0;
+                
+                // 增加计数
+                const hitResponse = await fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`);
+                const hitData = await hitResponse.json();
+                
+                // 更新显示
+                currentCount = hitData.value;
+                counterElement.textContent = `👁️ 浏览量: ${currentCount.toLocaleString()}`;
+                counterElement.title = `最后更新: ${new Date().toLocaleString()}`;
+                
+            } catch (error) {
+                console.error('浏览量计数器错误:', error);
+                counterElement.textContent = '👁️ 浏览量: 加载中...';
+            }
+        }
+        
+        // 页面加载完成后更新计数器
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', updateViewCounter);
+        } else {
+            updateViewCounter();
+        }
+    </script>
+</body>
+</html>
